@@ -11,6 +11,9 @@ import org.testng.annotations.Parameters;
 import com.qa.opencart.factory.DriverFactory;
 import com.qa.opencart.pages.AccountsPage;
 import com.qa.opencart.pages.LoginPage;
+import com.qa.opencart.pages.ProductInfoPage;
+import com.qa.opencart.pages.RegisterPage;
+import com.qa.opencart.pages.ResultsPage;
 
 public class BaseTest {
 	
@@ -19,9 +22,12 @@ public class BaseTest {
 	protected Properties prop;
 	protected LoginPage loginPage;
 	protected AccountsPage accPage;
+	protected ResultsPage resultsPage;
+	protected ProductInfoPage productInfoPage;
+	protected RegisterPage registerPage;
 	
 	@Parameters({"browser"})
-	@BeforeTest(groups={"Sanity", "Regression"})
+	@BeforeTest()
 	public void setUp(@Optional String browser) {
 		df = new DriverFactory();
 		prop = df.loadConfigProperties();
@@ -30,14 +36,11 @@ public class BaseTest {
 		}
 		driver = df.initDriver(prop);
 		loginPage = new LoginPage(driver);
-		accPage = new AccountsPage(driver);
 	}
 	
-	@AfterTest(groups={"Sanity", "Regression"})
+	@AfterTest()
 	public void tearDown() {
-		if(DriverFactory.getDriver()!=null) {
-			DriverFactory.getDriver().quit();
-		}
+		driver.quit();
 	}
 
 }

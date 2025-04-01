@@ -29,7 +29,7 @@ public class DriverFactory {
 
 	private static ThreadLocal<WebDriver> tldriver = new ThreadLocal<WebDriver>();
 	private OptionsManager optionsManager;
-	public static String highlight;
+	public static String isHighlight;
 
 	/**
 	 * This method initialize the driver based on the loaded configuration
@@ -40,7 +40,7 @@ public class DriverFactory {
 	 */
 	public WebDriver initDriver(Properties prop) {
 		optionsManager = new OptionsManager(prop);
-		highlight = prop.getProperty("highlight");
+		isHighlight = prop.getProperty("highlight");
 		String browser = prop.getProperty("browser").toLowerCase().trim();
 		if (!Boolean.parseBoolean(prop.getProperty("remote"))) {
 			Log.info("Running tests on Local with browser: " + browser);
