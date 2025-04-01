@@ -23,7 +23,8 @@ import com.qa.opencart.exceptions.FrameworkException;
 public class DriverFactory {
 
 	private static ThreadLocal<WebDriver> tldriver = new ThreadLocal<WebDriver>();
-	OptionsManager optionsManager;
+	private OptionsManager optionsManager;
+	public static String highlight;
 
 	/**
 	 * This method initialize the driver based on the loaded configuration containing Browser Name and Environment
@@ -32,6 +33,7 @@ public class DriverFactory {
 	 */
 	public WebDriver initDriver(Properties prop) {
 		optionsManager = new OptionsManager(prop);
+		highlight = prop.getProperty("highlight");
 		String browser = prop.getProperty("browser").toLowerCase().trim();
 		if (!Boolean.parseBoolean(prop.getProperty("remote"))) {
 			System.out.println("Running tests on Local with browser: "+browser);

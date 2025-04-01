@@ -9,14 +9,16 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.qa.opencart.factory.DriverFactory;
+import com.qa.opencart.pages.AccountsPage;
 import com.qa.opencart.pages.LoginPage;
 
 public class BaseTest {
 	
-	WebDriver driver;
-	DriverFactory df;
+	private WebDriver driver;
+	private DriverFactory df;
 	protected Properties prop;
 	protected LoginPage loginPage;
+	protected AccountsPage accPage;
 	
 	@Parameters({"browser"})
 	@BeforeTest
@@ -28,6 +30,7 @@ public class BaseTest {
 		}
 		driver = df.initDriver(prop);
 		loginPage = new LoginPage(driver);
+		accPage = new AccountsPage(driver);
 	}
 	
 	@AfterTest
