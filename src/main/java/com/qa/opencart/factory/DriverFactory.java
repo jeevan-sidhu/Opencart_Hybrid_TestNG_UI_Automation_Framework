@@ -19,6 +19,7 @@ import com.qa.opencart.constants.AppConstants;
 import com.qa.opencart.constants.AppErrors;
 import com.qa.opencart.exceptions.BrowserException;
 import com.qa.opencart.exceptions.FrameworkException;
+import com.qa.opencart.logger.Log;
 
 public class DriverFactory {
 
@@ -36,6 +37,7 @@ public class DriverFactory {
 		highlight = prop.getProperty("highlight");
 		String browser = prop.getProperty("browser").toLowerCase().trim();
 		if (!Boolean.parseBoolean(prop.getProperty("remote"))) {
+			Log.info("Running tests on Local with browser: "+browser);
 			System.out.println("Running tests on Local with browser: "+browser);
 			switch (browser) {
 			case "chrome":
@@ -48,6 +50,7 @@ public class DriverFactory {
 				tldriver.set(new EdgeDriver(optionsManager.getEdgeOptions()));
 				break;
 			default:
+				Log.error("Please pass the right browser name: "+browser);
 				System.out.println("Please pass the right browser name: "+browser);
 				throw new BrowserException(AppErrors.BROWSER_ERROR);
 			}

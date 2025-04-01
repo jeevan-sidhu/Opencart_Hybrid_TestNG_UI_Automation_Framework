@@ -21,7 +21,7 @@ public class LoginPage {
 		elUtil = new ElementUtil(driver);
 	}
 	
-	public String getPageTitle() {
+	public String getLoginPageTitle() {
 		String title = elUtil.waitForTitleToBe(AppConstants.LOGIN_PAGE_TITLE, TimeUtil.DEFAULT_TIME);
 		System.out.println("login page title : " + title);
 		return title;
