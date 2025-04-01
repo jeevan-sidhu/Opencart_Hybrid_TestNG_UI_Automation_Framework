@@ -21,7 +21,7 @@ public class BaseTest {
 	protected AccountsPage accPage;
 	
 	@Parameters({"browser"})
-	@BeforeTest
+	@BeforeTest(groups={"Sanity", "Regression"})
 	public void setUp(@Optional String browser) {
 		df = new DriverFactory();
 		prop = df.loadConfigProperties();
@@ -33,7 +33,7 @@ public class BaseTest {
 		accPage = new AccountsPage(driver);
 	}
 	
-	@AfterTest
+	@AfterTest(groups={"Sanity", "Regression"})
 	public void tearDown() {
 		if(DriverFactory.getDriver()!=null) {
 			DriverFactory.getDriver().quit();

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Opencart Test Suite" verbose="3" parallel="tests" thread-count="3">
+<suite name="Opencart Test Suite" verbose="3" parallel="tests" thread-count="2">
+
+	<listeners>
+		<listener
+			class-name="com.qa.opencart.listeners.ExtentReportListener" />
+		<listener
+			class-name="com.qa.opencart.listeners.TestAllureListener" />
+	</listeners>
 
 	<test name="Chrome Test">
 		<parameter name="browser" value="chrome" />

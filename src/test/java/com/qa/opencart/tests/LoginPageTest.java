@@ -9,12 +9,12 @@ import com.qa.opencart.constants.AppErrors;
 
 public class LoginPageTest extends BaseTest {
 	
-	@Test
+	@Test(groups={"Regression"})
 	public void loginPageTitleTest() {
 		Assert.assertEquals(loginPage.getLoginPageTitle(), "Account Login");
 	}
 	
-	@Test
+	@Test(groups={"Sanity"})
 	public void loginTest() {
 		accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
 		Assert.assertEquals(accPage.getAccPageTitle(), AppConstants.ACCOUNTS_PAGE_TITLE, AppErrors.TITLE_NOT_FOUND);

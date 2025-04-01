@@ -2,11 +2,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Opencart Test Suite" verbose="3">
 
+	<groups>
+		<run>
+			<include name="Sanity" />
+			<include name="Regression" />
+			<include name="DataDriven" />
+		</run>
+	</groups>
+
 	<listeners>
 		<listener
 			class-name="com.qa.opencart.listeners.ExtentReportListener" />
-		<listener
-			class-name="com.qa.opencart.listeners.TestAllureListener" />
 	</listeners>
 
 
