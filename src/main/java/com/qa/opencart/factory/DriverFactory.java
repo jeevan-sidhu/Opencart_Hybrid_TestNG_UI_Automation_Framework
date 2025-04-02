@@ -44,7 +44,6 @@ public class DriverFactory {
 		String browser = prop.getProperty("browser").toLowerCase().trim();
 		if (!Boolean.parseBoolean(prop.getProperty("remote"))) {
 			Log.info("Running tests on Local with browser: " + browser);
-			System.out.println("Running tests on Local with browser: " + browser);
 			switch (browser) {
 			case "chrome":
 				tldriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
@@ -61,7 +60,7 @@ public class DriverFactory {
 				throw new BrowserException(AppErrors.BROWSER_ERROR);
 			}
 		} else {
-			System.out.println("Running tests on Grid with browser: " + browser);
+			Log.info("Running tests on Grid with browser: " + browser);
 			URL hub = null;
 			try {
 				hub = new URI(prop.getProperty("huburl")).toURL();
@@ -79,7 +78,7 @@ public class DriverFactory {
 				tldriver.set(new RemoteWebDriver(hub, optionsManager.getEdgeOptions()));
 				break;
 			default:
-				System.out.println("Please pass the right browser on grid: " + browser);
+				Log.error("Please pass the right browser on grid: " + browser);
 				throw new BrowserException(AppErrors.BROWSER_ERROR);
 			}
 		}
@@ -141,7 +140,7 @@ public class DriverFactory {
 	}
 
 	public static String getScreenshot(String methodName) {
-		Log.info("*** Test: " + methodName + " Failed, Attaching Screenshot ***");
+		Log.info("Test: " + methodName + " Failed, Attaching Screenshot");
 		TakesScreenshot ts = (TakesScreenshot) getDriver();
 		File srcFile = ts.getScreenshotAs(OutputType.FILE);
 
@@ -152,9 +151,9 @@ public class DriverFactory {
 		File screenshotsDir = new File(screenshotsDirPath);
 		if (!screenshotsDir.exists()) {
 			if (screenshotsDir.mkdirs()) {
-				System.out.println("Folder 'screenshots' created successfully at: " + screenshotsDirPath);
+				Log.info("Folder 'screenshots' created successfully at: " + screenshotsDirPath);
 			} else {
-				System.out.println("Failed to create the folder 'screenshots' at: " + screenshotsDirPath);
+				Log.info("Failed to create the folder 'screenshots' at: " + screenshotsDirPath);
 			}
 		}
 

@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import com.qa.opencart.constants.AppConstants;
 import com.qa.opencart.utilities.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class ProductInfoPage {
 	
 	private WebDriver driver;
@@ -30,6 +32,7 @@ public class ProductInfoPage {
 		elUtil = new ElementUtil(driver);
 	}
 	
+	@Step("getting product name value")
 	public String getProductHeader() {
 		String productHeaderValue = 
 				elUtil.waitForElementVisible(productHeader, AppConstants.DEFAULT_SHORT_TIME_OUT).getText();
@@ -42,6 +45,7 @@ public class ProductInfoPage {
 //	Product Code: Product 18
 //	Reward Points: 800
 //	Availability: In Stock
+	@Step("fetching product meta data")
 	private void getProductMetaData() {
 		List<WebElement> metaList = elUtil.getElements(productMetaData);
 		for(WebElement meta : metaList) {
@@ -55,6 +59,7 @@ public class ProductInfoPage {
 	
 //	$2,000.00
 //	Ex Tax: $2,000.00
+	@Step("fetching product price data")
 	private void getProductPriceData() {
 		List<WebElement> priceList = elUtil.getElements(productPriceData);
 		String price = priceList.get(0).getText();
@@ -63,6 +68,7 @@ public class ProductInfoPage {
 		productMap.put("extaxprice", exTaxPrice);
 	} 
 	
+	@Step("getting product data")
 	public Map<String, String> getProductData() {
 		productMap = new HashMap<String,String>();//no order
 //		productMap = new LinkedHashMap<String,String>();//to maintain the insertion order
@@ -75,7 +81,7 @@ public class ProductInfoPage {
 		return productMap;
 	}
 	
-	
+	@Step("getting product images count")
 	public int getProductImagesCount() {
 		int imagesCount = 
 				elUtil.waitForElementsPresence(prouctImage, AppConstants.DEFAULT_MEDIUM_TIME_OUT).size();

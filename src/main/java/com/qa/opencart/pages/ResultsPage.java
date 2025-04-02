@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import com.qa.opencart.constants.AppConstants;
 import com.qa.opencart.utilities.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class ResultsPage {
 
 	private WebDriver driver;
@@ -19,18 +21,21 @@ public class ResultsPage {
 		elUtil = new ElementUtil(driver);
 	}
 
+	@Step("getting search header")
 	public String getSearchHeader() {
 		String searchHeaderValue = elUtil.waitForElementVisible(searchHeader, AppConstants.DEFAULT_SHORT_TIME_OUT)
 				.getText();
 		return searchHeaderValue;
 	}
 
+	@Step("getting search result count")
 	public int getSearchResultsCount() {
 		int resultCount = elUtil.waitForElementsVisible(results, AppConstants.DEFAULT_MEDIUM_TIME_OUT).size();
 		System.out.println("search result count ===> " + resultCount);
 		return resultCount;
 	}
 
+	@Step("Selecting product: {0}")
 	public ProductInfoPage selectProduct(String productName) {
 		System.out.println("selecting product: " + productName);
 		elUtil.doClick(By.linkText(productName));

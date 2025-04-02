@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import com.qa.opencart.logger.Log;
+
 public class OptionsManager {
 
 	private Properties prop;
@@ -20,7 +22,7 @@ public class OptionsManager {
 	public ChromeOptions getChromeOptions() {
 		co = new ChromeOptions();
 		if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-			System.out.println("====Running tests in headless======");
+			Log.info("====Running tests in headless======");
 			co.addArguments("--headless");
 		}
 		if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
@@ -35,7 +37,7 @@ public class OptionsManager {
 	public FirefoxOptions getFirefoxOptions() {
 		fo = new FirefoxOptions();
 		if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-			System.out.println("====Running tests in headless======");
+			Log.info("====Running tests in headless======");
 			fo.addArguments("--headless");
 		}
 		if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
@@ -50,7 +52,7 @@ public class OptionsManager {
 	public EdgeOptions getEdgeOptions() {
 		eo = new EdgeOptions();
 		if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-			System.out.println("====Running tests in headless======");
+			Log.info("====Running tests in headless======");
 			eo.addArguments("--headless");
 		}
 		if (Boolean.parseBoolean(prop.getProperty("incognito"))) {

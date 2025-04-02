@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import com.qa.opencart.constants.AppConstants;
 import com.qa.opencart.utilities.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class RegisterPage {
 
 	private WebDriver driver;
@@ -34,6 +36,7 @@ public class RegisterPage {
 		elUtil = new ElementUtil(driver);
 	}
 
+	@Step("Registering a new user: {0} {1}")
 	public boolean userRegisteration(String firstName, String lastName, String email, String telephone, String password, String subscribe) {
 
 		elUtil.waitForElementVisible(this.firstName, AppConstants.DEFAULT_MEDIUM_TIME_OUT).sendKeys(firstName);

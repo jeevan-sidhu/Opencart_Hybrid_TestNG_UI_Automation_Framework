@@ -10,6 +10,10 @@ import org.testng.asserts.SoftAssert;
 
 import com.qa.opencart.base.BaseTest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+
 public class ProductInfoPageTest extends BaseTest{
 	
 	
@@ -18,7 +22,8 @@ public class ProductInfoPageTest extends BaseTest{
 		accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
 	}
 	
-	
+	@Severity(SeverityLevel.NORMAL)
+	@Description("Searched product header test")
 	@Test
 	public void productHeaderTest() {
 		resultsPage = accPage.doSearch("macbook");
@@ -26,7 +31,8 @@ public class ProductInfoPageTest extends BaseTest{
 		Assert.assertEquals(productInfoPage.getProductHeader(), "MacBook Pro");
 	}
 		
-	
+	@Severity(SeverityLevel.NORMAL)
+	@Description("Searched product info test")
 	@Test
 	public void productInfoTest() {
 		
@@ -38,7 +44,7 @@ public class ProductInfoPageTest extends BaseTest{
 		softAssert.assertEquals(actProductDataMap.get("Brand"), "Apple");
 		softAssert.assertEquals(actProductDataMap.get("Product Code"), "Product 18");
 		softAssert.assertEquals(actProductDataMap.get("Reward Points"), "800");
-		softAssert.assertEquals(actProductDataMap.get("Availability"), "In Stock");
+		softAssert.assertEquals(actProductDataMap.get("Availability"), "Out Of Stock");
 		softAssert.assertEquals(actProductDataMap.get("productprice"), "$2,000.00");
 		softAssert.assertEquals(actProductDataMap.get("extaxprice"), "$2,000.00");
 		softAssert.assertAll();
@@ -56,7 +62,8 @@ public class ProductInfoPageTest extends BaseTest{
 		};
 	}
 	
-	
+	@Severity(SeverityLevel.MINOR)
+	@Description("Searched product images count test")
 	@Test(dataProvider = "getProductImagesCountData")
 	public void productImagesCountTest(String searchKey, String productName, int imagesCount) {
 		resultsPage = accPage.doSearch(searchKey);
