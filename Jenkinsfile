@@ -10,23 +10,10 @@ pipeline
     {
         stage('Build') 
         {
-            steps
-            {
-                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-            post 
-            {
-                success
-                {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
+           steps{
+                echo("deploy to qa")
             }
         }
-        
-        
-        
         
         
         stage("Deploy to QA"){
@@ -40,7 +27,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/jeevan-sidhu/Opencart_Hybrid_TestNG_UI_Automation_Framework.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/regression_test.xml"
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/regression_test.xml -Denv=qa"
                     
                 }
             }
