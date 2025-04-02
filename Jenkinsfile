@@ -8,6 +8,7 @@ pipeline
 
     stages 
     {
+        
         stage('Build') 
         {
             steps
@@ -36,7 +37,7 @@ pipeline
         stage('Regression UI Automation Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/jeevan-sidhu/Opencart_Hybrid_TestNG_UI_Automation_Framework.git'
+                    git branch: 'main', url: 'https://github.com/jeevan-sidhu/Opencart_Hybrid_TestNG_UI_Automation_Framework.git'
                     bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/regression_test.xml -Denv=qa"
                     
                 }
@@ -80,8 +81,8 @@ pipeline
         stage('Sanity Automation Test') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/jeevan-sidhu/Opencart_Hybrid_TestNG_UI_Automation_Framework.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=stage"
+                    git branch: 'main', url: 'https://github.com/jeevan-sidhu/Opencart_Hybrid_TestNG_UI_Automation_Framework.git'
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng.xml -Denv=stage"
                     
                 }
             }
