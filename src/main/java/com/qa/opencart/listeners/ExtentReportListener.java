@@ -92,11 +92,8 @@ public class ExtentReportListener implements ITestListener {
 	@Override
 	public synchronized void onTestSkipped(ITestResult result) {
 		Log.warn((result.getMethod().getMethodName() + " skipped!"));
-		String methodName = result.getMethod().getMethodName();
-		
+		String methodName = result.getMethod().getMethodName();		
 		test.get().skip("Test skipped");
-
-		test.get().skip(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(DriverFactory.getScreenshot(methodName), methodName).build());
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
